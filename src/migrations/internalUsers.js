@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Users = require('../models/user')
+const Users = require('../models/internalUsers')
 
 mongoose.Promise = global.Promise;
 
