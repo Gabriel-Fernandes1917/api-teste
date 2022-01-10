@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    type:{
+        type: String,
+        default: 'guest'
+    },
     createdAt:{
         type: Date,
         default: Date.now,
@@ -35,6 +39,6 @@ UserSchema.pre('save', async function(next){
     next();
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('ExternalUsers', UserSchema);
 
 module.exports = User;

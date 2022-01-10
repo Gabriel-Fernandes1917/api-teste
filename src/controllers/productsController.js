@@ -1,29 +1,32 @@
 const express = require('express')
 const Products = require('../models/products');
+const InternalUsers = require('../models/internalUsers');
+const authMiddleWare = require('../middlewares/auth');
 
 const router = express.Router()
 
-router.post('/registerproducts', async(req, res)=>{
-    const {chapa, aco,brita,concreto,cimento, areia,bloco_ceramico, bloco_concreto, telha_de_fibrocimento, porta_interna, esquadria, janela,
-        fechadura, placa_ceramica, bancada, placa_gesso, vidro, tinta, emulsao, fio_cobre, disjuntor, bacia, registro, tubo_ferro, tubo_PVC} = req.body;
+router.use(authMiddleWare);
 
-    
-    const products = Products.create(req.body)
-    
-    //res.send("enviado! ");
-    await res.send("enviado! ");
-
-   /* products, function(err, result) {
-        if(!err){
-            console.log("deu ruim nessa merda !! ")
-            
-        }else{
-            console.log(" Mission Passed + respect ! ")
-        }
-    }*/
-
-    return products;
+router.get('/', async (req, res) => {
+    const products = await Products.find({}).lean(); 
+    return res.send(products)
 })
+
+router.post('/register', async (req, res) => {
+
+    const { userId } = req
+
+    const user = InternalUsers.findById(userId)
+
+    if(!user) return res.status(405).send("User not allowed to register products")
+
+    const product = req.body
+
+    const products = await Products.create(product)
+
+    return res.send(products)
+})
+
 
 
 module.exports = app => app.use('/products', router);
