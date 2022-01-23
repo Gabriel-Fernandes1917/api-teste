@@ -24,7 +24,7 @@ router.post('/register', async(req, res)=>{
         if(await ExternalUsers.findOne({ email, cnpj }))
             return res.status(400).send({ erroor: 'User already exists'})
 
-        const user = await User.create(req.body);
+        const user = await ExternalUsers.create(req.body);
 
         user.password = undefined;
 
