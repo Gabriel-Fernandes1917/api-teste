@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Products = require('../models/products')
 
 mongoose.Promise = global.Promise;
-
+// tes
 module.exports = mongoose;
 
 const inserts = [

@@ -16,7 +16,7 @@ function generateToken(params = {}){
         expiresIn: 1*day,
     });
 }
-
+    //ok
 router.post('/register', async(req, res)=>{
     const { email, password, cnpj } = req.body;
 
@@ -36,7 +36,7 @@ router.post('/register', async(req, res)=>{
         return res.status(400).send({ error: 'Registration failed' });
     }
 });
-
+    //ok
 router.post('/authenticate', async(req, res)=>{
     const { email, password } = req.body;
 

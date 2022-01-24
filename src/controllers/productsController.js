@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     return res.send(products)
 })
 
-router.get
+
 
 router.post('/register', async (req, res) => {
 
